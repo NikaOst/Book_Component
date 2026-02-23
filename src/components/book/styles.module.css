@@ -1,0 +1,103 @@
+.wrap {
+  width: 100%;
+  height: 100vh;
+  padding-left: 9%;
+  padding-top: 8%;
+}
+
+.flipBook {
+  box-shadow: none;
+}
+
+.flipBook :global(.stf__wrapper),
+.flipBook :global(.stf__block),
+.flipBook :global(.stf__item) {
+  overflow: visible;
+}
+
+.flipBook :global(.stf__item.--left) {
+  margin-right: -70px;
+}
+
+.flipBook :global(.stf__item.--right) {
+  margin-left: -55px;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  background-image: url('../../assets/images/page2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 640px;
+  background-position: center;
+  color: #1f1f1f;
+  cursor: pointer;
+}
+
+.secondPage {
+  padding: 0;
+  overflow: hidden;
+  background-image: url('../../assets/images/page3.png');
+  background-repeat: no-repeat;
+  background-size: 90% 530px;
+  background-position: center;
+}
+
+.sketchImage {
+  margin-left: 30px;
+  width: 87%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.wrap .coverPage {
+  position: relative;
+  overflow: visible;
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  gap: 0;
+  background-image: url('../../assets/images/book.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  color: #f7efe8;
+}
+
+.coverBelts {
+  position: absolute;
+  left: 12%;
+  top: 0;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transform-origin: right center;
+  transform: translateX(0) rotateY(0deg);
+  transition: transform 100ms ease;
+  will-change: transform;
+}
+
+.coverUnlocking .coverBelts {
+  height: 100%;
+  width: 100%;
+  transform: translateX(-80px) rotateY(96deg);
+}
+
+.title {
+  margin: 0;
+  font-size: 34px;
+}
+
+.text {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.45;
+}
