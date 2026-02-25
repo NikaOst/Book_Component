@@ -2,11 +2,7 @@ import './App.css';
 import Book from './components/book';
 
 function App() {
-  return (
-    <div className="body">
-      <Book />
-    </div>
-  );
+  return <Book />;
 }
 
 export default App;

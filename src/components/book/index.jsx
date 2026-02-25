@@ -4,7 +4,11 @@ import styles from './styles.module.css';
 import wingedHussar from '../../assets/images/Winged_Hussar.png';
 import cossackSerdyuk from '../../assets/images/Cossack_Serdyuk.png';
 import belts from '../../assets/images/belts.png';
+import background from '../../assets/images/background_book.png';
 
+const sketches = [wingedHussar, cossackSerdyuk];
+
+// компонент страницы
 const Page = forwardRef(function Page({ children, onClick, className = '' }, ref) {
   return (
     <div ref={ref} className={`${styles.page} ${className}`} onClick={onClick}>
@@ -13,41 +17,47 @@ const Page = forwardRef(function Page({ children, onClick, className = '' }, ref
   );
 });
 
-const sketches = [wingedHussar, cossackSerdyuk];
-
 function Book() {
   const bookRef = useRef(null);
   const unlockTimeoutRef = useRef(null);
+  const beltsHideTimeoutRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [isCoverUnlocking, setIsCoverUnlocking] = useState(false);
+  const [isBeltsHidden, setIsBeltsHidden] = useState(false);
   const contentPages = [
     {
-      // title: 'Страница 1',
-      // text: 'Клик справа — вперед, клик слева — назад.',
+      title: 'Title',
+      text: 'text',
     },
+    {},
     {
-      // title: 'Страница 2',
-      // text: 'Перелистывание работает прямо по нажатию на лист.',
+      title: 'Title',
+      text: 'text',
     },
-    ...Array.from({ length: 2 }, () => ({
-      // title: `Страница ${index + 3}`,
-      // text: 'Про игру',
-    })),
+    {},
   ];
   const totalPages = contentPages.length + 1;
 
+  // чтобы анимации не наслаивались
   useEffect(() => {
     return () => {
       if (unlockTimeoutRef.current) {
         window.clearTimeout(unlockTimeoutRef.current);
       }
+
+      if (beltsHideTimeoutRef.current) {
+        window.clearTimeout(beltsHideTimeoutRef.current);
+      }
     };
   }, []);
 
+  // событие нажатия на страницы
   const handlePageClick = (event) => {
+    // размеры и позиция элемента
     const rect = event.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const isLeftSideClick = event.clientX < centerX;
+    // ссылка на методы книги
     const pageFlip = bookRef.current?.pageFlip();
 
     if (!pageFlip) {
@@ -60,13 +70,18 @@ function Book() {
       }
 
       setIsCoverUnlocking(true);
+      setIsBeltsHidden(false);
+      beltsHideTimeoutRef.current = window.setTimeout(() => {
+        setIsBeltsHidden(true);
+      }, 420);
       unlockTimeoutRef.current = window.setTimeout(() => {
         pageFlip.flipNext();
         setIsCoverUnlocking(false);
-      }, 620);
+      }, 860);
       return;
     }
 
+    // если клик по левой стороне, перевернуть назад
     if (isLeftSideClick) {
       if (currentPage <= 0) {
         return;
@@ -76,6 +91,7 @@ function Book() {
       return;
     }
 
+    // чтобы последняя страница не перелистывалась
     if (currentPage >= totalPages - 1) {
       return;
     }
@@ -84,52 +100,69 @@ function Book() {
   };
 
   return (
-    <div className={styles.wrap}>
-      <HTMLFlipBook
-        ref={bookRef}
-        width={450}
-        height={530}
-        minWidth={360}
-        maxWidth={740}
-        minHeight={470}
-        maxHeight={920}
-        showCover
-        disableFlipByClick
-        useMouseEvents={false}
-        mobileScrollSupport={false}
-        onFlip={(event) => setCurrentPage(event.data)}
-        className={styles.flipBook}>
-        <Page
-          onClick={handlePageClick}
-          className={`${styles.coverPage} ${isCoverUnlocking ? styles.coverUnlocking : ''}`}>
-          <img src={belts} alt="Belts" className={styles.coverBelts} />
-        </Page>
+    <div className={styles.bookContainer}>
+      <div className={styles.wrap}>
+        <img className={styles.backgroundBook} src={background} alt="background_book" />
 
-        {contentPages.map((page, index) => {
-          const isSecondPage = index % 2 === 1;
-          const sketchIndex = Math.floor(index / 2) % sketches.length;
+        <div className={styles.bookLayer}>
+          <HTMLFlipBook
+            ref={bookRef}
+            width={440}
+            height={500}
+            minWidth={360}
+            maxWidth={740}
+            minHeight={470}
+            maxHeight={920}
+            showCover
+            disableFlipByClick
+            useMouseEvents={false}
+            mobileScrollSupport={false}
+            onFlip={(event) => {
+              setCurrentPage(event.data);
 
-          return (
+              if (event.data === 0) {
+                setIsBeltsHidden(false);
+              }
+            }}
+            className={styles.flipBook}>
+            {/* обложка + ремни */}
             <Page
-              key={`${page.title || 'page'}-${index}`}
               onClick={handlePageClick}
-              className={isSecondPage ? styles.secondPage : ''}>
-              {isSecondPage ? (
-                <img
-                  // src={sketches[sketchIndex]}
-                  alt={`Sketch ${sketchIndex + 1}`}
-                  className={styles.sketchImage}
-                />
-              ) : (
-                <>
-                  <h2 className={styles.title}>{page.title}</h2>
-                  <p className={styles.text}>{page.text}</p>
-                </>
-              )}
+              className={`${styles.coverPage} ${isCoverUnlocking ? styles.coverUnlocking : ''}`}>
+              <img
+                src={belts}
+                alt="Belts"
+                className={`${styles.coverBelts} ${isBeltsHidden ? styles.coverBeltsHidden : ''}`}
+              />
             </Page>
-          );
-        })}
-      </HTMLFlipBook>
+
+            {contentPages.map((page, index) => {
+              const isSecondPage = index % 2 === 1;
+              const sketchIndex = Math.floor(index / 2) % sketches.length;
+
+              return (
+                <Page
+                  key={`${page.title || 'page'}_${index}`}
+                  onClick={handlePageClick}
+                  className={isSecondPage ? styles.secondPage : ''}>
+                  {isSecondPage ? (
+                    <img
+                      src={sketches[sketchIndex]}
+                      alt={`Sketch ${sketchIndex + 1}`}
+                      className={styles.sketchImage}
+                    />
+                  ) : (
+                    <>
+                      <h2 className={styles.title}>{page.title}</h2>
+                      <p className={styles.text}>{page.text}</p>
+                    </>
+                  )}
+                </Page>
+              );
+            })}
+          </HTMLFlipBook>
+        </div>
+      </div>
     </div>
   );
 }
