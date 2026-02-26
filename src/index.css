@@ -11,3 +11,58 @@ body,
   height: 100%;
   overflow: hidden;
 }
+
+/* global background evocative of 15th‑century Ukrainian Cossacks */
+/*
+  We now generate our own SVG pattern instead of relying on pre-existing
+  raster assets. The `cossack-bg.svg` file contains a subtle repeating
+  tryzub motif over a parchment‑colored base.
+
+  To tweak the look, edit the SVG directly or adjust the --bg-color variable
+  below. If you ever want to switch back to an image, you can still override
+  by setting `--bg-image` on :root above this rule.
+*/
+:root {
+  /* dark shady background base color */
+  --bg-color: #11121a;
+  /* optional image is no longer used, but variable kept for future overrides */
+  --bg-image: none;
+}
+
+body {
+  background: var(--bg-color);
+}
+
+/* floating particle animation copied from riversband-website */
+@keyframes float-particle {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-100px) translateX(30px) scale(1.5);
+  }
+}
+
+.particles-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* keep the flying gold dots behind the rest of the UI; app's Book component renders later in the DOM,
+     so it will paint on top even with z-index:0. Avoid negative z-index so they aren't hidden behind body. */
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  /* actual color is assigned inline via style attribute (blue or yellow) */
+  background: transparent;
+}

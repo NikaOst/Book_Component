@@ -4,6 +4,35 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: book-fade-in 0.8s ease-out;
+}
+
+@keyframes book-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* highlights belts to show they're clickable */
+@keyframes belts-pulse {
+  0%, 100% {
+    filter: brightness(1) drop-shadow(0 0 0px rgba(255, 215, 0, 0));
+  }
+  50% {
+    filter: brightness(1.15) drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+  }
+}
+
+@keyframes belts-bounce {
+  0%, 100% {
+    transform: translateX(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateX(-5px) rotateY(0deg);
+  }
 }
 
 .backgroundBook {
@@ -38,8 +67,17 @@
 
 .flipBook :global(.stf__wrapper),
 .flipBook :global(.stf__block),
+.flipBook :global(.stf__block-side),
 .flipBook :global(.stf__item) {
   overflow: visible;
+  /* remove harsh shadows from page flips */
+  box-shadow: none !important;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1)) !important;
+}
+
+.flipBook :global(.stf__block) {
+  /* subtle ambient shadow instead of harsh drop shadow */
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.08)) !important;
 }
 
 .flipBook :global(.stf__item.--left) {
@@ -113,6 +151,8 @@
     transform 420ms ease,
     opacity 400ms ease;
   will-change: transform, opacity;
+  /* pulsing glow and bounce to highlight and suggest interactivity */
+  animation: belts-pulse 2s ease-in-out infinite, belts-bounce 2.5s ease-in-out infinite;
 }
 
 .coverBeltsHidden {

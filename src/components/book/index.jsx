@@ -17,10 +17,11 @@ const Page = forwardRef(function Page({ children, onClick, className = '' }, ref
   );
 });
 
-function Book() {
+function Book({ shouldOpen = false }) {
   const bookRef = useRef(null);
   const unlockTimeoutRef = useRef(null);
   const beltsHideTimeoutRef = useRef(null);
+  const hasAutoOpenedRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [isCoverUnlocking, setIsCoverUnlocking] = useState(false);
   const [isBeltsHidden, setIsBeltsHidden] = useState(false);
@@ -38,7 +39,30 @@ function Book() {
   ];
   const totalPages = contentPages.length + 1;
 
-  // чтобы анимации не наслаивались
+  // trigger auto-open if shouldOpen is true (only once)
+  useEffect(() => {
+    if (shouldOpen && !hasAutoOpenedRef.current) {
+      hasAutoOpenedRef.current = true;
+      // small delay to ensure flipbook is mounted and ready
+      const delayedOpen = window.setTimeout(() => {
+        if (bookRef.current?.pageFlip) {
+          setIsCoverUnlocking(true);
+          setIsBeltsHidden(false);
+          beltsHideTimeoutRef.current = window.setTimeout(() => {
+            setIsBeltsHidden(true);
+          }, 420);
+          unlockTimeoutRef.current = window.setTimeout(() => {
+            bookRef.current?.pageFlip().flipNext();
+            setIsCoverUnlocking(false);
+          }, 860);
+        }
+      }, 100);
+      
+      return () => window.clearTimeout(delayedOpen);
+    }
+  }, [shouldOpen]);
+
+  // clean up timeouts
   useEffect(() => {
     return () => {
       if (unlockTimeoutRef.current) {
