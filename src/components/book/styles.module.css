@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'LATINO';
+  src: url('../../assets/fonts/LATINO/LATINO.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 .bookContainer {
   position: fixed;
   inset: 0;
@@ -140,6 +148,10 @@
   cursor: pointer;
   text-align: center;
   padding: 4.8rem;
+}
+
+.page :is(h2, p) {
+  font-family: 'LATINO', serif;
 }
 
 .page::before,

@@ -1,16 +1,7 @@
-@font-face {
-  font-family: 'LATINO';
-  src: url('./assets/fonts/LATINO/LATINO.otf') format('opentype');
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'LATINO', serif;
 }
 
 html,
