@@ -138,6 +138,8 @@
   background-position: center;
   color: #1f1f1f;
   cursor: pointer;
+  text-align: center;
+  padding: 4.8rem;
 }
 
 .page::before,

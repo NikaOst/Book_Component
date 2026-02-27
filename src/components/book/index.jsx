@@ -30,17 +30,17 @@ function Book({ shouldOpen = false }) {
   const contentPages = [
     {
       title: 'Title',
-      text: 'text',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!',
     },
     {},
     {
       title: 'Title',
-      text: 'text',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!',
     },
     {},
     {
       title: 'Title',
-      text: 'text',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!',
     },
     {},
   ];
