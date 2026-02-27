@@ -3,10 +3,12 @@ import HTMLFlipBook from 'react-pageflip';
 import styles from './styles.module.css';
 import wingedHussar from '../../assets/images/Winged_Hussar.png';
 import cossackSerdyuk from '../../assets/images/Cossack_Serdyuk.png';
+import Ottoman_Elite_Janissary from '../../assets/images/Ottoman_Elite_Janissary.png';
 import belts from '../../assets/images/belts.png';
 import background from '../../assets/images/background_book.png';
+import button from '../../assets/images/button.png';
 
-const sketches = [wingedHussar, cossackSerdyuk];
+const sketches = [wingedHussar, cossackSerdyuk, Ottoman_Elite_Janissary];
 
 // компонент страницы
 const Page = forwardRef(function Page({ children, onClick, className = '' }, ref) {
@@ -26,6 +28,11 @@ function Book({ shouldOpen = false }) {
   const [isCoverUnlocking, setIsCoverUnlocking] = useState(false);
   const [isBeltsHidden, setIsBeltsHidden] = useState(false);
   const contentPages = [
+    {
+      title: 'Title',
+      text: 'text',
+    },
+    {},
     {
       title: 'Title',
       text: 'text',
@@ -57,7 +64,7 @@ function Book({ shouldOpen = false }) {
           }, 860);
         }
       }, 100);
-      
+
       return () => window.clearTimeout(delayedOpen);
     }
   }, [shouldOpen]);
@@ -88,23 +95,6 @@ function Book({ shouldOpen = false }) {
       return;
     }
 
-    if (currentPage === 0) {
-      if (isCoverUnlocking) {
-        return;
-      }
-
-      setIsCoverUnlocking(true);
-      setIsBeltsHidden(false);
-      beltsHideTimeoutRef.current = window.setTimeout(() => {
-        setIsBeltsHidden(true);
-      }, 420);
-      unlockTimeoutRef.current = window.setTimeout(() => {
-        pageFlip.flipNext();
-        setIsCoverUnlocking(false);
-      }, 860);
-      return;
-    }
-
     // если клик по левой стороне, перевернуть назад
     if (isLeftSideClick) {
       if (currentPage <= 0) {
@@ -121,6 +111,28 @@ function Book({ shouldOpen = false }) {
     }
 
     pageFlip.flipNext();
+  };
+
+  const handleOpenButtonClick = () => {
+    if (currentPage !== 0 || isCoverUnlocking) {
+      return;
+    }
+
+    const pageFlip = bookRef.current?.pageFlip();
+
+    if (!pageFlip) {
+      return;
+    }
+
+    setIsCoverUnlocking(true);
+    setIsBeltsHidden(false);
+    beltsHideTimeoutRef.current = window.setTimeout(() => {
+      setIsBeltsHidden(true);
+    }, 420);
+    unlockTimeoutRef.current = window.setTimeout(() => {
+      pageFlip.flipNext();
+      setIsCoverUnlocking(false);
+    }, 860);
   };
 
   return (
@@ -149,26 +161,33 @@ function Book({ shouldOpen = false }) {
               }
             }}
             className={styles.flipBook}>
-            {/* обложка + ремни */}
+            {/* обложка + ремни + кнопка */}
             <Page
-              onClick={handlePageClick}
               className={`${styles.coverPage} ${isCoverUnlocking ? styles.coverUnlocking : ''}`}>
               <img
                 src={belts}
                 alt="Belts"
                 className={`${styles.coverBelts} ${isBeltsHidden ? styles.coverBeltsHidden : ''}`}
               />
+              <button
+                type="button"
+                className={styles.coverButton}
+                onClick={handleOpenButtonClick}
+                aria-label="Open book">
+                <img src={button} alt="Open book" className={styles.coverButtonImage} />
+              </button>
             </Page>
 
             {contentPages.map((page, index) => {
               const isSecondPage = index % 2 === 1;
+              const isLeftPage = index % 2 === 0;
               const sketchIndex = Math.floor(index / 2) % sketches.length;
 
               return (
                 <Page
                   key={`${page.title || 'page'}_${index}`}
                   onClick={handlePageClick}
-                  className={isSecondPage ? styles.secondPage : ''}>
+                  className={`${isSecondPage ? styles.secondPage : ''} ${isLeftPage ? styles.leftPage : styles.rightPage}`}>
                   {isSecondPage ? (
                     <img
                       src={sketches[sketchIndex]}
