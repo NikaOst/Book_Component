@@ -80,12 +80,12 @@
 
 .backgroundBook {
   display: block;
-  width: auto;
+  width: 1600px;
   max-width: none;
-  height: auto;
+  height: 700px;
   object-fit: cover;
   z-index: 0;
-  transform: translateX(150px) translateY(100px);
+  transform: translateX(210px) translateY(100px);
 }
 
 .bookLayer {
@@ -128,12 +128,8 @@
   filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.08)) !important;
 }
 
-.flipBook :global(.stf__item.--left) {
-  margin-right: -70px;
-}
-
 .flipBook :global(.stf__item.--right) {
-  margin-left: -55px;
+  margin-left: -20px;
 }
 
 .page {
@@ -147,7 +143,7 @@
   gap: 16px;
   background-image: url('../../assets/images/page2.png');
   background-repeat: no-repeat;
-  background-size: 100% 640px;
+  background-size: 110% 640px;
   background-position: center;
   color: #1f1f1f;
   cursor: pointer;
@@ -161,7 +157,7 @@
 
 .cornerLeft {
   position: absolute;
-  left: 10px;
+  left: -10px;
   bottom: 0;
   width: 100px;
   height: auto;
@@ -174,7 +170,7 @@
 
 .cornerRight {
   position: absolute;
-  right: 3px;
+  right: -14px;
   bottom: 0;
   width: 100px;
   height: auto;
@@ -188,7 +184,7 @@
 .page::before,
 .page::after {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   font-size: 58px;
   font-weight: 700;
   line-height: 1;
@@ -204,12 +200,12 @@
 
 .page::before {
   content: '';
-  left: 30px;
+  left: 15px;
 }
 
 .page::after {
   content: '';
-  right: 30px;
+  right: 15px;
 }
 
 .leftPage::before {
@@ -225,7 +221,7 @@
   overflow: hidden;
   background-image: url('../../assets/images/page3.png');
   background-repeat: no-repeat;
-  background-size: 90% 510px;
+  background-size: 98% 510px;
   background-position: center;
 }
 
