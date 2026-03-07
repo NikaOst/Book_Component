@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import HTMLFlipBook from 'react-pageflip';
 import styles from './styles.module.css';
-import wingedHussar from '../../assets/images/Winged_Hussar_opt.webp';
+// import wingedHussar from '../../assets/images/Winged_Hussar_opt.webp';
 import cossackSerdyuk from '../../assets/images/Cossack_Serdyuk_opt.webp';
 import Ottoman_Elite_Janissary from '../../assets/images/Ottoman_Elite_Janissary_opt.webp';
 import belts from '../../assets/images/belts_opt.webp';
@@ -61,9 +61,7 @@ function Book({ shouldOpen = false }) {
       text: t('pages.page1.text'),
     },
     {
-      type: 'image',
-      image: wingedHussar,
-      imageAlt: 'Winged Hussar',
+      type: 'blank',
     },
     {
       type: 'text',
@@ -205,21 +203,23 @@ function Book({ shouldOpen = false }) {
     [isCoverUnlocking],
   );
 
-  // trigger auto-open if shouldOpen is true (only once)
   useEffect(() => {
     if (shouldOpen && !hasAutoOpenedRef.current) {
-      hasAutoOpenedRef.current = true;
-      // small delay to ensure flipbook is mounted and ready
       const delayedOpen = window.setTimeout(() => {
         const pageFlip = bookRef.current?.pageFlip();
+
+        if (!pageFlip || hasAutoOpenedRef.current) {
+          return;
+        }
+
+        hasAutoOpenedRef.current = true;
         runOpenSequence(pageFlip);
-      }, 100);
+      }, 1000);
 
       return () => window.clearTimeout(delayedOpen);
     }
   }, [runOpenSequence, shouldOpen]);
 
-  // clean up timeouts
   useEffect(() => {
     return () => {
       if (preOpenShiftTimeoutRef.current) {
@@ -273,20 +273,6 @@ function Book({ shouldOpen = false }) {
     if (pageFlip) {
       pageFlip.flip(page);
     }
-  };
-
-  const handleOpenButtonClick = () => {
-    if (currentPage !== 0 || isCoverUnlocking || isPreOpenShift) {
-      return;
-    }
-
-    const pageFlip = bookRef.current?.pageFlip();
-
-    if (!pageFlip) {
-      return;
-    }
-
-    runOpenSequence(pageFlip);
   };
 
   return (
@@ -355,13 +341,9 @@ function Book({ shouldOpen = false }) {
                 alt="Belts"
                 className={`${styles.coverBelts} ${isBeltsHidden ? styles.coverBeltsHidden : ''}`}
               />
-              <button
-                type="button"
-                className={styles.coverButton}
-                onClick={handleOpenButtonClick}
-                aria-label={t('ariaLabels.openBook')}>
-                <img src={button} alt="Open book" className={styles.coverButtonImage} />
-              </button>
+              <div className={styles.coverButton} aria-hidden="true">
+                <img src={button} alt="" className={styles.coverButtonImage} />
+              </div>
             </Page>
 
             {contentPages.map((page, index) => {
