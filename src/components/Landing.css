@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'PRECIOSA';
+  src: url('../../assets/fonts/LATINO/Preciosa.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 .landing {
   position: fixed;
   inset: 0;
@@ -46,7 +54,8 @@
 }
 
 @keyframes glow {
-  0%, 100% {
+  0%,
+  100% {
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   }
   50% {
@@ -60,17 +69,20 @@
 }
 
 .landing-title {
+  font-family: 'PRECIOSA';
   font-size: 72px;
   font-weight: bold;
   color: #ffd700;
   margin: 0 0 40px 0;
   animation: glow 3s ease-in-out infinite;
   letter-spacing: 2px;
-  text-shadow: 0 0 30px rgba(255, 215, 0, 0.6),
-               0 0 60px rgba(255, 215, 0, 0.3);
+  text-shadow:
+    0 0 30px rgba(255, 215, 0, 0.6),
+    0 0 60px rgba(255, 215, 0, 0.3);
 }
 
 .landing-button {
+  font-family: 'PRECIOSA';
   padding: 14px 40px;
   font-size: 16px;
   font-weight: 600;

@@ -4,22 +4,79 @@
     "button-text": "Learn About The Game"
   },
   "bookmarks": {
-    "characters": "Characters",
-    "mechanics": "Mechanics",
-    "socialMedia": "Social Media"
+    "intro": "Introduction",
+    "fractions": "Fractions",
+    "media": "Media",
+    "aboutProject": "About project",
+    "aboutUs": "About us"
   },
+
   "pages": {
     "page1": {
-      "title": "Title",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!"
+      "title": "Introduction",
+      "text": "I am Francisco Perez, a researcher at the Lepus Royal Academy. I For a very long time I have been studying the history of our world from books, and now I plan to set out on a journey to an unexplored part of it. Three great empires fell. The tribes that had once paid tribute quickly reorganized into armies and marched toward the capitals, which led to the collapse of the established order. Following the fall of the empires, the tribes settled and formed new kingdoms. This marked the beginning of a new age."
     },
     "page3": {
-      "title": "Title",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!"
+      "text": "It is now the year 1464. Our world has plunged into wars, and the borders of empires and kingdoms shift with lightning speed. In the center of our continent there is a region known as the Blazing Steppes. It has changed hands so often that no map could show clear borders of its territory. In earlier times, it had been the center of power of the Principality of Zlatograd. Its fall occurred during the time of the Second Dark Wave (as the invasion of the united nomadic peoples of the East is called). At that time, its lands were already suffering from internal wars and conflicts. This led to the destruction of the central region, the separation of its territories, and a great cultural decline."
+    },
+    "page4": {
+      "text": "Now three great powers claim the region as their own: the Aslan Sultanate, Korona Niebiańska, and the Tsardom of Bagragrad. Yet despite being surrounded by powerful neighbours, the people of the Steppes remained unbroken. They managed to preserve their identity and culture, and even spread it. The peasants were educated and able to read and write - something rare among many kingdoms of their region, and even ours. The main driving force behind this resilience are the wandering artists, or as they call themselves, Kobzars. They teach anyone willing how to read and write, sing folk songs, and even heal those in need. These people stand against every invader and every oppressor;"
     },
     "page5": {
-      "title": "Title",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero suscipit porro, quidem sit, aperiam quasi nihil commodi possimus asperiores adipisci culpa rem mollitia ea ut consequatur, inventore velit a ex!"
+      "text": "the flames of rebellion rise whenever injustice is brought upon their culture. I intend to travel through their lands and study this remarkable phenomenon."
+    },
+    "page7": {
+      "title": "The Principality of Zlatograd",
+      "subtitle": "Capital: Zlatograd",
+      "text": "A ruined kingdom in the center of the continent. In the past, its lands stretched far to the east, north, and south, reaching the sea and the peninsula. The realm consisted of several principalities and, before its fall, had greatly strengthened its cultural and political ties with the kingdoms of the West. Its collapse occurred during the Second Dark Wave, when nomadic hordes laid siege to Zlatograd. The allies chose to pay tribute to the nomads and abandon their union, which ultimately led to Zlatograd being burned to the ground."
+    },
+    "page9": {
+      "text": "Afterward, the people of the Principality of Zlatograd remained in the territory that constantly changed hands between rival powers. Because of this, the region came to be known as the Blazing Steppes. Ever since they continue to preserve their culture and fight for the chance to restore their country. Whenever the need arises, they build fortresses known as Sich. These are led by Hetmans and Atamans. For the time being, they have no single figure capable of uniting them under one banner. Yet during my travels I see men gathering in groups, each led by a local leader. It seems to me they are waiting for a man who can rise as their Hetman and lead them into the battles that lie ahead."
+    },
+    "page11": {
+      "title": "The Aslan Sultanate / The Lion Sultanate",
+      "subtitle": "Capital: Bakhtra",
+      "subtitle_2": "Sultan: Kemal III",
+      "text": "A vast empire located to the south of the Blazing Steppes. It is composed of Middle Eastern nations and was formed in the aftermath of the Dark Wave. The sultanate brought many scattered tribes under its protection, gradually incorporating their lands into a single empire. The realm possesses a highly developed culture, nations with rich historical traditions and great potential for trade."
+    },
+    "page13": {
+      "text": "Its elite forces are the Janissaries, children taken as tribute or captured during military campaigns and raised to serve the state. The most distinguished Janissary warriors also serve as the personal bodyguards of the Sultan. For the past few decades, the sultanate has not sought to claim the lands of the Blazing Steppes outright. However, it continues to carry out raids to capture slaves, and pillage resources. The sultanate is currently ruled by Kemal III. His dynasty ascended to the throne after the collapse that followed the Second Dark Wave. In a kingdom weakened by a decade of defending itself against nomadic invasions, his ancestors staged a bloody palace coup and seized the throne."
+    },
+    "page14": {
+      "text": "Yet despite this violent beginning, within a few generations the dynasty gained the favor of the people. Kemal II, the father of the current ruler, became beloved among the populace for a series of reforms that strengthened the respect among the nations incorporated into the empire."
+    },
+    "page15": {
+      "title": "Korona Niebiańska",
+      "subtitle": "Capital: Artawa",
+      "subtitle_2": "King: Wojciech II",
+      "text": "To the west of the Burning Steppes lies the kingdom of the Heavenly Crown or, as they call themselves, Korona Niebiańska. A realm that was among the last to embrace the Catholic faith. Today, it holds a formidable sway over Western politics, and tales of their elite Winged Hussars strike fear across the continent. Yet, fortune favors the neighboring kingdoms, for the warriors of the Crown have largely turned their attention to the northern lands and the scorched plains to the east."
+    },
+    "page17": {
+      "text": "In my travels through their cities, I observed that, though they may not rival our own in architectural opulence, there is an undeniable elegance to their urban design. Each structure is both functional and harmonious, shaped by the demands of their unique lands. King Wojciech II governs with a vigilant eye upon the legacy of his forebears. Though his reign has seen few conquests, he remains beloved by his people. He is unyielding in the defense of his borders, striking swiftly against any who would claim even the smallest fragment of his kingdom. Remarkably, despite his conservative stance on the affairs of the Burning Steppes, he has defied the edicts of his predecessors,"
+    },
+    "page18": {
+      "text": "stripping certain nobles of their privileges and curtailing their influence - a bold move that has sent ripples of tension through the realm."
+    },
+    "page19": {
+      "title": "Bagrograd Kingdom",
+      "subtitle": "Capital: Bagrograd",
+      "subtitle_2": "King: Alexey IV Dmitrievich",
+      "text": "To the north lies the Bagrograd Kingdom, born from the splinter tribes that have previously been part of the Zlatograd Principality. During the Second Wave, the kingdom refused alliances, choosing instead to pay tribute to the nomadic khan. This shrewd decision allowed them to rise above the other former allied states, weakened by devastating wars. When the Second Wave collapsed, they seized the lands of the fallen principalities, expanding their domain with remarkable swiftness."
+    },
+    "page21": {
+      "text": "Their culture grew from slash-and-burn agriculture and hunting, practices that constantly bordered on the struggle for survival. It has bred in them a pragmatic, almost cold regard for life - a stark contrast to the peoples of the West. While we in the West are accustomed to enslaving distant peoples for our colonies, the Bagrogradians have no hesitation in turning their own subjects into slaves. Even their demeanor is stern and somber; displays of joy or laughter are often met with suspicion. I find them a nation very unlike any I have known, and I shall observe them closely in my travels. King Alexey IV is a descendant of an old line of princes and tsars. The history of his house has long fascinated Western historians and chroniclers."
+    },
+    "page22": {
+      "text": "Many uprisings have challenged the crown, yet the moment Alexey appeared among the dissenters and quelled their defiance, they submitted willingly to his will. On one occasion, protest over excessive taxation led to a law that fully subjugated the kingdom’s population - an act that has since given rise to legends, whispers of magical artifacts, and arcane ties within his family."
+    },
+    "page23": {
+      "title": "Video"
+    },
+    "page25": {
+      "title": "About our project"
+    },
+    "page27": {
+      "title": "About us"
     }
   },
   "ariaLabels": {

@@ -13,8 +13,8 @@ import cornerRight from '../../assets/images/corner_right_opt.webp';
 import bookMark1 from '../../assets/images/book_mark_1_opt.webp';
 import bookMark2 from '../../assets/images/book_mark_2_opt.webp';
 import bookMark3 from '../../assets/images/book_mark_3_opt.webp';
-
-const sketches = [wingedHussar, cossackSerdyuk, Ottoman_Elite_Janissary];
+import bookMark4 from '../../assets/images/book_mark_4_opt.webp';
+import bookMark5 from '../../assets/images/book_mark_5_opt.webp';
 
 // компонент страницы
 const Page = forwardRef(function Page({ children, onClick, className = '' }, ref) {
@@ -39,27 +39,144 @@ function Book({ shouldOpen = false }) {
 
   // sections shown in the sidebar bookmarks. labels are now translated.
   const sections = [
-    { label: t('bookmarks.characters'), page: 1, image: bookMark1 },
-    { label: t('bookmarks.mechanics'), page: 3, image: bookMark2 },
-    { label: t('bookmarks.socialMedia'), page: 5, image: bookMark3 },
+    { label: t('bookmarks.intro'), page: 1, image: bookMark1 },
+    { label: t('bookmarks.fractions'), page: 7, image: bookMark2 },
+    { label: t('bookmarks.media'), page: 23, image: bookMark3 },
+    { label: t('bookmarks.aboutProject'), page: 25, image: bookMark4 },
+    { label: t('bookmarks.aboutUs'), page: 27, image: bookMark5 },
+  ];
+
+  const bookMarksText = [
+    { title: t('bookmarks.intro') },
+    { title: t('bookmarks.fractions') },
+    { title: t('bookmarks.media') },
+    { title: t('bookmarks.aboutProject') },
+    { title: t('bookmarks.aboutUs') },
   ];
 
   const contentPages = [
     {
+      type: 'text',
       title: t('pages.page1.title'),
       text: t('pages.page1.text'),
     },
-    {},
     {
-      title: t('pages.page3.title'),
+      type: 'image',
+      image: wingedHussar,
+      imageAlt: 'Winged Hussar',
+    },
+    {
+      type: 'text',
       text: t('pages.page3.text'),
     },
-    {},
     {
-      title: t('pages.page5.title'),
+      type: 'text',
+      text: t('pages.page4.text'),
+    },
+    {
+      type: 'text',
       text: t('pages.page5.text'),
     },
-    {},
+    {
+      type: 'blank',
+    },
+    {
+      type: 'text',
+      title: t('pages.page7.title'),
+      subtitle: t('pages.page7.subtitle'),
+      text: t('pages.page7.text'),
+    },
+    {
+      type: 'image',
+      image: cossackSerdyuk,
+      imageAlt: 'Cossack Serdyuk',
+    },
+    {
+      type: 'text',
+      text: t('pages.page9.text'),
+    },
+    {
+      type: 'blank',
+    },
+    {
+      type: 'text',
+      title: t('pages.page11.title'),
+      subtitle: t('pages.page11.subtitle'),
+      subtitle_2: t('pages.page11.subtitle_2'),
+      text: t('pages.page11.text'),
+    },
+    {
+      type: 'image',
+      image: Ottoman_Elite_Janissary,
+      imageAlt: 'Ottoman Elite Janissary',
+    },
+    {
+      type: 'text',
+      text: t('pages.page13.text'),
+    },
+    {
+      type: 'text',
+      text: t('pages.page14.text'),
+    },
+    {
+      type: 'text',
+      title: t('pages.page15.title'),
+      subtitle: t('pages.page15.subtitle'),
+      subtitle_2: t('pages.page15.subtitle_2'),
+      text: t('pages.page15.text'),
+    },
+    {
+      type: 'blank',
+    },
+    {
+      type: 'text',
+      text: t('pages.page17.text'),
+    },
+    {
+      type: 'text',
+      text: t('pages.page18.text'),
+    },
+    {
+      type: 'text',
+      title: t('pages.page19.title'),
+      subtitle: t('pages.page19.subtitle'),
+      subtitle_2: t('pages.page19.subtitle_2'),
+      text: t('pages.page19.text'),
+    },
+    {
+      type: 'blank',
+    },
+    {
+      type: 'text',
+      text: t('pages.page21.text'),
+    },
+    {
+      type: 'text',
+      text: t('pages.page22.text'),
+    },
+    {
+      type: 'text',
+      title: t('pages.page23.title'),
+    },
+    {
+      type: 'video',
+      videoSrc: '/videos/page24.mp4',
+      videoType: 'video/mp4',
+    },
+    {
+      type: 'text',
+      title: t('pages.page25.title'),
+    },
+    {
+      type: 'blank',
+    },
+    {
+      type: 'text',
+      title: t('pages.page27.title'),
+    },
+    {
+      type: 'blank',
+    },
   ];
   const totalPages = contentPages.length + 1;
 
@@ -177,16 +294,34 @@ function Book({ shouldOpen = false }) {
       <div className={`${styles.wrap} ${isPreOpenShift ? styles.preOpenShift : ''}`}>
         {/* bookmarks sidebar attached to the book */}
         <div className={`${styles.bookmarks} ${currentPage > 0 ? styles.bookmarksOpen : ''}`}>
-          {sections.map((sec) => (
-            <button
-              key={sec.label}
-              type="button"
-              className={`${styles.bookmark} ${currentPage === sec.page ? styles.activeBookmark : ''}`}
-              onClick={() => handleBookmarkClick(sec.page)}
-              aria-label={t('ariaLabels.goToPage', { section: sec.label })}>
-              <img src={sec.image} alt={sec.label} className={styles.bookmarkImage} />
-            </button>
-          ))}
+          {sections.map((sec, index) => {
+            let isActive = currentPage === sec.page;
+            const bookmarkLabel = bookMarksText[index]?.title || sec.label;
+
+            if (index === 0) {
+              isActive = currentPage >= 1 && currentPage < 7;
+            } else if (index === 1) {
+              isActive = currentPage >= 7 && currentPage < 23;
+            } else if (index === 2) {
+              isActive = currentPage >= 23 && currentPage < 24;
+            } else if (index === 3) {
+              isActive = currentPage >= 25 && currentPage < 26;
+            } else if (index === 4) {
+              isActive = currentPage >= 27;
+            }
+
+            return (
+              <button
+                key={sec.label}
+                type="button"
+                className={`${styles.bookmark} ${isActive ? styles.activeBookmark : ''}`}
+                onClick={() => handleBookmarkClick(sec.page)}
+                aria-label={t('ariaLabels.goToPage', { section: sec.label })}>
+                <img src={sec.image} alt={sec.label} className={styles.bookmarkImage} />
+                <span className={styles.bookmarkText}>{bookmarkLabel}</span>
+              </button>
+            );
+          })}
         </div>
         <img className={styles.backgroundBook} src={background} alt="background_book" />
 
@@ -230,37 +365,72 @@ function Book({ shouldOpen = false }) {
             </Page>
 
             {contentPages.map((page, index) => {
-              const isSecondPage = index % 2 === 1;
               const isLeftPage = index % 2 === 0;
-              const sketchIndex = Math.floor(index / 2) % sketches.length;
+              const isImagePage = page.type === 'image';
+              const isBlankPage = page.type === 'blank';
+              const isVideoPage = page.type === 'video';
+              const isLastPage = index === contentPages.length - 1;
+              const hasPage3Background = !isLeftPage;
 
               return (
                 <Page
-                  key={`${page.title || 'page'}_${index}`}
+                  key={`${page.type || 'page'}_${index}`}
                   onClick={handlePageClick}
-                  className={`${isSecondPage ? styles.secondPage : ''} ${isLeftPage ? styles.leftPage : styles.rightPage}`}>
-                  {isSecondPage ? (
+                  className={`${isImagePage ? styles.imagePage : ''} ${isVideoPage ? styles.videoPage : ''} ${hasPage3Background ? styles.secondPage : ''} ${isBlankPage ? styles.blankPage : ''} ${isLastPage ? styles.lastPage : ''} ${isLeftPage ? styles.leftPage : styles.rightPage}`}>
+                  {isImagePage ? (
                     <>
                       <img
-                        src={cornerRight}
-                        alt="Folded page corner right"
-                        className={styles.cornerRight}
+                        src={isLeftPage ? cornerLeft : cornerRight}
+                        alt={isLeftPage ? 'Folded page corner left' : 'Folded page corner right'}
+                        className={isLeftPage ? styles.cornerLeft : styles.cornerRight}
                       />
                       <img
-                        src={sketches[sketchIndex]}
-                        alt={`Sketch ${sketchIndex + 1}`}
+                        src={page.image}
+                        alt={page.imageAlt || 'Sketch'}
                         className={styles.sketchImage}
                       />
                     </>
+                  ) : isVideoPage ? (
+                    <>
+                      <img
+                        src={isLeftPage ? cornerLeft : cornerRight}
+                        alt={isLeftPage ? 'Folded page corner left' : 'Folded page corner right'}
+                        className={isLeftPage ? styles.cornerLeft : styles.cornerRight}
+                      />
+                      <div
+                        className={styles.videoWrapper}
+                        onClick={(event) => event.stopPropagation()}
+                        onPointerDown={(event) => event.stopPropagation()}>
+                        {page.title ? <h2 className={styles.title}>{page.title}</h2> : null}
+                        <video
+                          className={styles.videoPlayer}
+                          controls
+                          preload="metadata"
+                          playsInline>
+                          <source src={page.videoSrc} type={page.videoType || 'video/mp4'} />
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </>
+                  ) : isBlankPage ? (
+                    <img
+                      src={isLeftPage ? cornerLeft : cornerRight}
+                      alt={isLeftPage ? 'Folded page corner left' : 'Folded page corner right'}
+                      className={isLeftPage ? styles.cornerLeft : styles.cornerRight}
+                    />
                   ) : (
                     <>
                       <img
-                        src={cornerLeft}
-                        alt="Folded page corner"
-                        className={styles.cornerLeft}
+                        src={isLeftPage ? cornerLeft : cornerRight}
+                        alt={isLeftPage ? 'Folded page corner left' : 'Folded page corner right'}
+                        className={isLeftPage ? styles.cornerLeft : styles.cornerRight}
                       />
-                      <h2 className={styles.title}>{page.title}</h2>
-                      <p className={styles.text}>{page.text}</p>
+                      {page.title ? <h2 className={styles.title}>{page.title}</h2> : null}
+                      {page.subtitle ? <p className={styles.subtitle}>{page.subtitle}</p> : null}
+                      {page.subtitle_2 ? (
+                        <p className={styles.subtitle}>{page.subtitle_2}</p>
+                      ) : null}
+                      {page.text ? <p className={styles.text}>{page.text}</p> : null}
                     </>
                   )}
                 </Page>

@@ -1,6 +1,14 @@
 @font-face {
-  font-family: 'LATINO';
-  src: url('../../assets/fonts/LATINO/LATINO.otf') format('opentype');
+  font-family: 'PRECIOSA';
+  src: url('../../assets/fonts/LATINO/Preciosa.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MONOMAKH_UA';
+  src: url('../../assets/fonts/LATINO/ofont.ru_Monomakh%20Unicode.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -138,7 +146,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -150,11 +157,41 @@
   color: #1f1f1f;
   cursor: pointer;
   text-align: center;
-  padding: 4.8rem;
+  padding: 3rem;
 }
 
-.page :is(h2, p) {
-  font-family: 'LATINO', serif;
+.page h2 {
+  font-family: 'PRECIOSA', serif;
+}
+
+.page p {
+  font-family: 'PRECIOSA', serif;
+}
+
+.bookmarkText {
+  font-family: 'PRECIOSA', serif;
+}
+
+:global(body.lang-en) .page h2,
+:global(body.lang-en) .page p,
+:global(body.lang-en) .bookmarkText {
+  font-family: 'PRECIOSA', serif;
+}
+
+:global(body.lang-ua) .page h2,
+:global(body.lang-ua) .page p,
+:global(body.lang-ua) .bookmarkText {
+  font-family: 'MONOMAKH_UA', serif;
+}
+
+:global(body.lang-ua) .page p,
+:global(body.lang-ua) .bookmarkText {
+  font-size: 1.08rem;
+}
+
+:global(body.lang-en) .page p,
+:global(body.lang-en) .bookmarkText {
+  font-size: 1.16rem;
 }
 
 .cornerLeft {
@@ -218,9 +255,36 @@
   content: '›';
 }
 
-.secondPage {
+.imagePage {
   padding: 0;
   overflow: hidden;
+}
+
+.videoPage::before {
+  display: none;
+}
+
+.videoWrapper {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  transform: translateY(22%);
+}
+
+.videoPlayer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  background: #000;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.secondPage {
   background-image: url('../../assets/images/page3_opt.webp');
   background-repeat: no-repeat;
   background-size: 98% 510px;
@@ -314,13 +378,13 @@
      vertically centre it.  the offset variable lets you tweak the
      horizontal position inwards or outwards relative to the page. */
   position: absolute;
-  top: 0;
+  top: -50px;
   bottom: 0;
   right: 200px; /* nudges tabs left from the wrapper edge onto the page */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 300ms ease;
@@ -329,12 +393,6 @@
 .bookmarksOpen {
   opacity: 1;
   pointer-events: auto;
-}
-
-/* helpers for easy manual adjustment */
-.bookmarks {
-  /* you can override offset inline, e.g.:
-     style={{ '--bookmark-offset': '-16px' }} to pull tabs onto the page more */
 }
 
 .bookmark {
@@ -361,6 +419,19 @@
   display: block;
 }
 
+.bookmarks .bookmark .bookmarkText {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 .bookmark:hover {
   transform: scale(1.05);
 }
@@ -375,6 +446,14 @@
   z-index: 10; /* push active tab above everything */
 }
 
+.blankPage::before {
+  display: none;
+}
+
+.lastPage::after {
+  display: none;
+}
+
 @media (max-width: 640px) {
   .bookmarks {
     display: none;
@@ -382,12 +461,30 @@
 }
 
 .title {
-  margin: 0;
-  font-size: 34px;
+  position: relative;
+  left: 0px;
+  margin-bottom: 15px;
+  font-size: 23px;
+  transform: translateY(-26px);
+}
+
+.subtitle {
+  position: relative;
+  left: 0px;
+  margin-bottom: 10px;
+  left: -10px;
+  width: 100%;
+  text-align: left;
+  line-height: 1.35;
+  transform: translateY(-24px);
 }
 
 .text {
+  position: relative;
+  left: -10px;
   margin: 0;
-  font-size: 20px;
+  width: 100%;
+  text-align: left;
   line-height: 1.45;
+  transform: translateY(-22px);
 }
