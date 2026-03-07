@@ -396,21 +396,7 @@
 }
 
 .bookmark {
-  position: relative;
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  padding: 0;
-  line-height: 0;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.2s;
-  transform-origin: center;
-  z-index: 1;
+  display: none;
 }
 
 .bookmarkImage {
