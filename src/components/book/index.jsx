@@ -15,6 +15,7 @@ import bookMark2 from '../../assets/images/book_mark_2_opt.webp';
 import bookMark3 from '../../assets/images/book_mark_3_opt.webp';
 import bookMark4 from '../../assets/images/book_mark_4_opt.webp';
 import bookMark5 from '../../assets/images/book_mark_5_opt.webp';
+import mapImage from '../../assets/images/map3.png';
 
 // компонент страницы
 const Page = forwardRef(function Page({ children, onClick, className = '' }, ref) {
@@ -351,15 +352,26 @@ function Book({ shouldOpen = false }) {
               const isImagePage = page.type === 'image';
               const isBlankPage = page.type === 'blank';
               const isVideoPage = page.type === 'video';
+              const isMapPage = index === 1;
               const isLastPage = index === contentPages.length - 1;
               const hasPage3Background = !isLeftPage;
+              const shouldUseSecondPageBackground = hasPage3Background && !isMapPage;
 
               return (
                 <Page
                   key={`${page.type || 'page'}_${index}`}
                   onClick={handlePageClick}
-                  className={`${isImagePage ? styles.imagePage : ''} ${isVideoPage ? styles.videoPage : ''} ${hasPage3Background ? styles.secondPage : ''} ${isBlankPage ? styles.blankPage : ''} ${isLastPage ? styles.lastPage : ''} ${isLeftPage ? styles.leftPage : styles.rightPage}`}>
-                  {isImagePage ? (
+                  className={`${isImagePage ? styles.imagePage : ''} ${isVideoPage ? styles.videoPage : ''} ${isMapPage ? styles.mapSinglePage : ''} ${shouldUseSecondPageBackground ? styles.secondPage : ''} ${isBlankPage ? styles.blankPage : ''} ${isLastPage ? styles.lastPage : ''} ${isLeftPage ? styles.leftPage : styles.rightPage}`}>
+                  {isMapPage ? (
+                    <>
+                      <img
+                        src={isLeftPage ? cornerLeft : cornerRight}
+                        alt={isLeftPage ? 'Folded page corner left' : 'Folded page corner right'}
+                        className={isLeftPage ? styles.cornerLeft : styles.cornerRight}
+                      />
+                      <img src={mapImage} alt="Map" className={styles.mapSingleImage} />
+                    </>
+                  ) : isImagePage ? (
                     <>
                       <img
                         src={isLeftPage ? cornerLeft : cornerRight}

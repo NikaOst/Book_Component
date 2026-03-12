@@ -209,8 +209,8 @@
 
 .cornerRight {
   position: absolute;
-  right: -14px;
-  bottom: 0;
+  right: -10px;
+  bottom: -13px;
   width: 100px;
   height: auto;
   object-fit: contain;
@@ -247,17 +247,35 @@
   right: 15px;
 }
 
-.leftPage::before {
+/* .leftPage::before {
   content: '‹';
-}
+} */
 
-.rightPage::after {
+/* .rightPage::after {
   content: '›';
-}
+} */
 
 .imagePage {
   padding: 0;
   overflow: hidden;
+}
+
+.mapSinglePage {
+  padding: 0;
+  overflow: hidden;
+  background-image: none;
+}
+
+.mapSingleImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 90%;
+  width: 90%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
 .videoPage::before {
